@@ -10,28 +10,10 @@
 #include <unistd.h>
 using namespace cv;
  
-void readme();
-
-// vactor<Mat> image_laplacian(Mat image)
-// {
-//     int level =5;
-//     vector <Mat> GaussianPyramid;
-//     vector <Mat> LaplacianPyramid;
-//     Mat temp1, temp2, temp3;
-//     Mat Lap;
-//     image.copyTo(temp1);
-//     for(int i=0; i<level; i++){
-//         pyrDown(temp1, temp2);
-//         pyrUp(temp2, temp3, temp1.size());  
-//         Lap = temp1-temp3;
-//         GaussianPyramid.push_back(temp2);
-//         LaplacianPyramid.push_back(Lap);
-//         temp1=temp2;
-//     }
-//     //show whatever you want.
-//     waitKey(0); 
-//     return LaplacianPyramid
-// }
+void readme()
+{
+	printf("This project takes input from 3 video streams and stitches the videos, frame by frame.");
+}
 
 
 Mat calculate_h_matrix(Mat image1, Mat image2, Mat gray_image1, Mat gray_image2)
@@ -153,6 +135,7 @@ Mat stitch_image(Mat image1, Mat image2, Mat H)
 
 int main( int argc, char** argv )
 {
+	readme();
  // if( argc != 4 )
  // { readme(); return -1; }
 Mat gray_image1;
