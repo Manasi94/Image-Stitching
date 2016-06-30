@@ -69,10 +69,12 @@ proportion of outliers in the input data.
 
 2. The order of images in first method is no concern. In second method however the order is very important as it can give you crappy output result.
 
+3. In the second method after stitching the two image pairs, the result also had a black region. This region was hampering the further H matrix calculations and hence had to be removed. At first, I observed the black region occupied half of the image space and hence I decided to simply cut the part. However once i shifted from images to video ,I realized part of my image was also being chopped off. Hence I decided to use contours to solve this problem. The contours were sorted in descending order of size and the largest contours was selected and updated as the image space.
+
 ##Conclusions
 The second method works excellent with images.But it is however not producing excellent results with videos. The first method is giving decent results with videos, but is a little slow.
 
-##Resources
+##Resources and References
 1. <a href="http://people.scs.carleton.ca/~c_shu/Courses/comp4900d/notes/homography.pdf"> Dr. Gerhard Roth notes on homography </a>
 2. <a href = "http://www.cs.toronto.edu/~jepson/csc2503/tutorials/homography.pdf"> Tutorial on 2D homographies at University of Toronto </a>
 3. <a href = "http://www.cs.ubc.ca/~lowe/papers/09muja.pdf"> FAST APPROXIMATE NEAREST NEIGHBORS WITH AUTOMATIC ALGORITHM CONFIGURATION </a>
