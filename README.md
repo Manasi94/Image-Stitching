@@ -26,13 +26,13 @@ Second method involves more steps which I will discuss here.
    Now, we calculate the H matrix for image pairs (I1, I2), let us call it H12, and (I2, I3), let's call it H23. Since I1 and I3 will not have a lot of areas in common there is no point in calculating H matrix for these image pairs.
 
    Image 1: 
-   ![Alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S1.jpg "Image1")
+   ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S1.jpg "Image1")
 
    Image 2: 
-   ![Alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S2.jpg "Image2")
+   ![Alt text]https://github.com/Manasi94/Image-Stitching/blob/master/data/S2.jpg "Image2")
 
    Image 3: 
-   ![Alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S3.jpg "Image3")
+   ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S3.jpg "Image3")
 
    Choose a image as reference image. Among the 3 images presented to us, the image I2 has the most in common with I1 and with I3 (since it is in the center). Hence we chose I2 as the reference image.This is also the reason why we do not compute H matrix for I1 and I3 image pairs, because we only compute the homography of images with the reference image, I2.
 
