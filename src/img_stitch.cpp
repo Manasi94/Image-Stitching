@@ -18,8 +18,10 @@ void readme()
 
 Mat calculate_h_matrix(Mat image1, Mat image2, Mat gray_image1, Mat gray_image2)
 {
+	
+
 	//-- Step 1: Detect the keypoints using SURF Detector
-	int minHessian = 400;
+	int minHessian = 200;
 	SurfFeatureDetector detector( minHessian );
 	std::vector< KeyPoint > keypoints_object, keypoints_scene;
 	detector.detect( gray_image1, keypoints_object );
@@ -49,8 +51,8 @@ Mat calculate_h_matrix(Mat image1, Mat image2, Mat gray_image1, Mat gray_image2)
 	 if( dist > max_dist ) max_dist = dist;
 	 }
 	 
-	printf("-- Max dist between image1 and image2: %f \n", max_dist );
-	printf("-- Min dist between image1 and image2: %f \n", min_dist );
+	printf("-- Max dist: %f \n", max_dist );
+	printf("-- Min dist: %f \n", min_dist );
 
 
 	//-- Use only "good" matches (i.e. whose distance is less than 3*min_dist )
@@ -145,6 +147,8 @@ Mat gray_image4;
 Mat img, img2;
 Mat gray_img;
 Mat result;
+Mat img_gray, img_gray2, img_gray3, img_gray4,img_gray5;
+Mat img3, img4, img5, img6;
 
 // Load the images
 VideoCapture cap1(1); 
@@ -203,7 +207,7 @@ for(;;)
 	// 	{ std::cout<< " --(!) Error reading images " << std::endl; return -1; }
 
 
-	Mat img_gray, img_gray2, img_gray3, img_gray4,img_gray5, img3, img4, img5, img6;
+
 
 	Mat H12 = calculate_h_matrix(image2,image1, gray_image2, gray_image1);
 	// Mat H13 = calculate_h_matrix(image1,image3, gray_image1, gray_image3);
@@ -219,13 +223,60 @@ for(;;)
 
 	//Stitch Image 2 and Image 3 and saved in img
 	img = stitch_image(image3,image2,H23);
-	img = img(Rect(0,0,(img.cols*3/5),(img.rows)));
 	cvtColor(img, img_gray, COLOR_BGR2GRAY);
+
+	// //Finding the largest contour i.e remove the black region from image
+	threshold(img_gray, img_gray,25, 255,THRESH_BINARY); //Threshold the gray
+	vector<vector<Point> > contours; // Vector for storing contour
+    vector<Vec4i> hierarchy;
+    findContours( img_gray, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE ); // Find the contours in the image
+    int largest_area = 0;
+    int largest_contour_index = 0;
+    Rect bounding_rect;
+
+    for( int i = 0; i< contours.size(); i++ ) // iterate through each contour. 
+    {
+       double a=contourArea( contours[i],false);  //  Find the area of contour
+       if(a>largest_area){
+       largest_area=a;
+       largest_contour_index=i;                //Store the index of largest contour
+       bounding_rect=boundingRect(contours[i]); // Find the bounding rectangle for biggest contour
+       }
+   
+    }
+
+	// Scalar color( 255,255,255);
+  	img = img(Rect(bounding_rect.x, bounding_rect.y, bounding_rect.width, bounding_rect.height));
+ 
+ 
+
+
 
 	//Stitch Image 1 and Image 2 and saved in img2
 	img2 = stitch_image(image2, image1, H12);
-	img2 = img2(Rect(0,0,(img2.cols/2),(img2.rows)));
 	cvtColor(img2, img_gray2, COLOR_BGR2GRAY);
+
+	//Finding the largest contour i.e remove the black region from image
+	threshold(img_gray2, img_gray2,25, 255,THRESH_BINARY); //Threshold the gray
+	vector<vector<Point> > contours2; // Vector for storing contour
+    vector<Vec4i> hierarchy2;
+    findContours( img_gray2, contours2, hierarchy2,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE ); // Find the contours in the image
+    int largest_area2 = 0;
+    int largest_contour_index2 = 0;
+    Rect bounding_rect2;
+
+    for( int i = 0; i< contours2.size(); i++ ) // iterate through each contour. 
+    {
+       double a=contourArea( contours2[i],false);  //  Find the area of contour
+       if(a>largest_area2){
+       largest_area2=a;
+       largest_contour_index2=i;                //Store the index of largest contour
+       bounding_rect2=boundingRect(contours2[i]); // Find the bounding rectangle for biggest contour
+       }
+   
+    }
+
+	img2 = img2(Rect(bounding_rect2.x, bounding_rect2.y, bounding_rect2.width, bounding_rect2.height));
 
 	// //Stitch Image 3 and Image 4 and saved in img3
 	// img3 = stitch_image(image3, image4, H34);
@@ -236,12 +287,12 @@ for(;;)
 	//Show img
 	cv::imshow("Hist_Equalized_Result of Image 2 and Image 3", img);
 	cv::imwrite("./Result/Result23.jpg", img);
-	waitKey(0);
+	// waitKey(0);
 
 	//Show img2
 	cv::imshow("Hist_Equalized_Result of Image 1 and Image 2", img2);
 	cv::imwrite("./Result/Result12.jpg", img2);
-	waitKey(0);
+	// waitKey(0);
 
 	// //Show img3
 	// // cv::resize(img2,img2,image1.size());
@@ -253,8 +304,8 @@ for(;;)
 	// Stitch (Image 1 and Image 2) and (Image 2 and Image 3)
 	Mat H123 = calculate_h_matrix(img,img2, img_gray, img_gray2);
 	img4 = stitch_image(img,img2, H123);
-	img4 = img4(Rect(0,0,(img4.cols*7/10),(img4.rows)));
-	cvtColor(img4, img_gray4, COLOR_BGR2GRAY);
+	// img4 = img4(Rect(0,0,(img4.cols*7/10),(img4.rows)));
+	// cvtColor(img4, img_gray4, COLOR_BGR2GRAY);
 
 	// //Stitch (Image 2 and Image 3) and (Image 3 and Image 4)
 	// Mat H234 = calculate_h_matrix(img3,img, img_gray3, img_gray);
@@ -268,7 +319,7 @@ for(;;)
 
 	cv::imshow("Hist_Equalized_Result of Image 1 and Image 2 and Image 3", img4);
 	cv::imwrite("./Result/Result123.jpg", img4);
-	waitKey(0);
+	// waitKey(0);
 
 	// cv::imshow("Hist_Equalized_Result of Image 2 and Image 3 and Image 4" , img5);
 	// cv::imwrite("./Result/Result234.jpg", img5);
@@ -277,9 +328,8 @@ for(;;)
 	// cv::imshow("Hist_Equalized_Result of Image 1 and Image 2 and Image 3 and Image 4" , img6);
 	// cv::imwrite("./Result/Result1234.jpg", img6);
 	// waitKey(0);
-
 	if(waitKey(30) >= 0) break;
-	// else usleep(200000);
+	else usleep(2000000);
 
 }
 
