@@ -25,6 +25,8 @@ Second method involves more steps which I will discuss here.
 
    Now, we calculate the H matrix for image pairs (I1, I2), let us call it H12, and (I2, I3), let's call it H23. Since I1 and I3 will not have a lot of areas in common there is no point in calculating H matrix for these image pairs.
 
+   For example, the images in the data folder :
+   
    Image 1: 
    ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S1.jpg "Image1")
 
