@@ -14,22 +14,22 @@ You just have to input the frames as a vector of images to the function stitcher
 
 Second method involves more steps which I will discuss here.
 
-First the frames from the 3 video input devices are captured. Then the pairwaise H matrix (homography matrix) is calculated. 
+   First the frames from the 3 video input devices are captured. Then the pairwaise H matrix (homography matrix) is calculated. 
 
-The H matrix is 3*3 matrix.Homography relates the pixel co-ordinates in the two images.
+   The H matrix is 3*3 matrix.Homography relates the pixel co-ordinates in the two images.
 
-When applied to every pixel the new image is a warped version of the original image
+   When applied to every pixel the new image is a warped version of the original image
 
 
-Let us assmue the 3 input frames are I1 , I2 and I3 in the order from left to right.(This assmuption is possible in my case since the camera positions are fixed and I have written the code keeping in mind the which camera will be the leftmost.)
+   Let us assmue the 3 input frames are I1 , I2 and I3 in the order from left to right.(This assmuption is possible in my case since the camera positions are fixed and I have written the code keeping in mind the which camera will be the leftmost.)
 
-Now, we calculate the H matrix for image pairs (I1, I2), let us call it H12, and (I2, I3), let's call it H23. Since I1 and I3 will not have a lot of areas in common there is no point in calculating H matrix for these image pairs.
+   Now, we calculate the H matrix for image pairs (I1, I2), let us call it H12, and (I2, I3), let's call it H23. Since I1 and I3 will not have a lot of areas in common there is no point in calculating H matrix for these image pairs.
 
-Chose a image as reference image. Among the 3 images presented to us, the image I2 has the most in common with I1 and with I3 (since it is in the center). Hence we chose I2 as the reference images.This is also the reason why we do not compute H matrix for I1 and I3 image pairs, because we only compute the homography of images with the reference image, I2.
+   Choose a image as reference image. Among the 3 images presented to us, the image I2 has the most in common with I1 and with I3 (since it is in the center). Hence we chose I2 as the reference images.This is also the reason why we do not compute H matrix for I1 and I3 image pairs, because we only compute the homography of images with the reference image, I2.
 
-Now using our H matrices we wrape the image pairs (I1,I2), now called I12, and (I2,I3), now called I23.
+   Now using our H matrices we wrape the image pairs (I1,I2), now called I12, and (I2,I3), now called I23.
 
-Again calculate the H matrix for images I12 and I23 and wrap them up finally to get the ouptup I123. Tadaa!
+  Again calculate the H matrix for images I12 and I23 and wrap them up finally to get the ouptup I123. Tadaa!
 
 
 ##Implementation
