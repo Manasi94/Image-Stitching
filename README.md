@@ -29,7 +29,7 @@ Second method involves more steps which I will discuss here.
    ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S1.jpg "Image1")
 
    Image 2: 
-   ![Alt text]https://github.com/Manasi94/Image-Stitching/blob/master/data/S2.jpg "Image2")
+   ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S2.jpg "Image2")
 
    Image 3: 
    ![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/data/S3.jpg "Image3")
