@@ -25,9 +25,18 @@ Second method involves more steps which I will discuss here.
 
    Now, we calculate the H matrix for image pairs (I1, I2), let us call it H12, and (I2, I3), let's call it H23. Since I1 and I3 will not have a lot of areas in common there is no point in calculating H matrix for these image pairs.
 
-   Choose a image as reference image. Among the 3 images presented to us, the image I2 has the most in common with I1 and with I3 (since it is in the center). Hence we chose I2 as the reference images.This is also the reason why we do not compute H matrix for I1 and I3 image pairs, because we only compute the homography of images with the reference image, I2.
+   Image 1: 
+   ![alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S1.jpg "Image1")
 
-   Now using our H matrices we wrape the image pairs (I1,I2), now called I12, and (I2,I3), now called I23.
+   Image 2: 
+   ![alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S2.jpg "Image2")
+
+   Image 3: 
+   ![alt text](https:https://github.com/Manasi94/Image-Stitching/blob/master/data/S3.jpg "Image3")
+
+   Choose a image as reference image. Among the 3 images presented to us, the image I2 has the most in common with I1 and with I3 (since it is in the center). Hence we chose I2 as the reference image.This is also the reason why we do not compute H matrix for I1 and I3 image pairs, because we only compute the homography of images with the reference image, I2.
+
+   Now using our H matrices we wrap the image pairs (I1,I2), now called I12, and (I2,I3), now called I23.
 
   Again calculate the H matrix for images I12 and I23 and wrap them up finally to get the ouptup I123. Tadaa!
 
@@ -58,7 +67,7 @@ Calculation of H matrix :
 5. Finds a perspective transformation between two planes using RANSAC
 
    RANdom SAmple Consensus (RANSAC) is a general parameter estimation approach designed to cope with a large
-proportion of outliers in the input data. 
+   proportion of outliers in the input data. 
    
    It takes the final keypoints from the two images as input and the method of model estimation. You can also change the method from RANSAC to LMEDS. The advantages and disadvantages of each method are discussed in [5]
 
