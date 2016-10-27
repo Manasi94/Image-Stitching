@@ -84,6 +84,7 @@ Calculation of H matrix :
 
 ##Conclusions
 The second method works excellent with images.But it is however not producing excellent results with videos. The first method is giving decent results with videos, but is a little slow.
+![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/Result/stitching_result.jpg "Result")
 
 ##Resources and References
 1. <a href="http://people.scs.carleton.ca/~c_shu/Courses/comp4900d/notes/homography.pdf"> Dr. Gerhard Roth notes on homography </a>
