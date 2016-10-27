@@ -77,10 +77,11 @@ Calculation of H matrix :
 
 ##Errors and How they were fixed
 1. Major error was the device capture index numbers. You can check these indices using VLC or other methods and modify these numbers in the code.
-![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/Result/result234.jpg "Error Result")
+
 2. The order of images in first method is no concern. In second method however the order is very important as it can give you crappy output result.
 
 3. In the second method after stitching the two image pairs, the result also had a black region. This region was hampering the further H matrix calculations and hence had to be removed. At first, I observed the black region occupied half of the image space and hence I decided to simply cut the part. However once i shifted from images to video ,I realized part of my image was also being chopped off. Hence I decided to use contours to solve this problem. The contours were sorted in descending order of size and the largest contours was selected and updated as the image space.
+![Alt text](https://github.com/Manasi94/Image-Stitching/blob/master/Result/result234.jpg "Error Result")
 
 ##Conclusions
 The second method works excellent with images.But it is however not producing excellent results with videos. The first method is giving decent results with videos, but is a little slow.
